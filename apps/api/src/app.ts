@@ -53,7 +53,7 @@ export default class App {
     const sampleRouter = new SampleRouter();
 
     this.app.get('/api', (req: Request, res: Response) => {
-      res.send(`Hello, Purwadhika Student !`);
+      res.send(`Hello Sobat Puskanas !`);
     });
 
     this.app.use('/api/samples', sampleRouter.getRouter());
