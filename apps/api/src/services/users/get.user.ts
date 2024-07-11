@@ -9,6 +9,7 @@ export const GetUserService = async (id: number) => {
     if (!user) {
      throw new Error('user not found!');
     }
+    
     return user
   } catch (error) {
     throw error;
