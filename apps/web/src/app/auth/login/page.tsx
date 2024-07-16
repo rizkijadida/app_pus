@@ -33,9 +33,11 @@ const Login = () => {
       },
     });
   return (
+
     <main className="container mx-auto h-[100vh] px-4 bg-gradient-to-r from-[#2853b2] to-[#1c71cd]">
       <div className=" flex justify-center">
         <Card className="w-[350px] my-20">
+
           <CardHeader>
             <CardTitle className="text-center text-3xl text-primary">
               SIGN IN

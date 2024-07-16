@@ -22,12 +22,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <StoreProvider>
+
           {' '}
           <AuthProvider>
             <Header />
             {children}
             <Footer />
           </AuthProvider>{' '}
+
         </StoreProvider>
       </body>
     </html>

@@ -2,6 +2,7 @@
 import FormInput from '@/components/FormInput';
 import { Button } from '@/components/ui/button';
 import {
+
   Card,
   CardContent,
   CardDescription,
@@ -83,6 +84,7 @@ const Register = () => {
     <main className="container mx-auto h-[200vh] px-4 bg-gradient-to-r from-[#2853b2] to-[#1c71cd]">
       <div className=" flex justify-center">
         <Card className="w-[350px] my-20">
+
           <CardHeader>
             <CardTitle className="text-center text-3xl text-primary">
               SIGN UP
@@ -95,7 +97,9 @@ const Register = () => {
             <form onSubmit={handleSubmit}>
               <div className="grid w-full items-center gap-4">
                 {/* firstName */}
+
                 <FormInput
+
                   name="firstName"
                   type="text"
                   label="First Name"
@@ -108,14 +112,18 @@ const Register = () => {
                 />
 
                 {/* lastName */}
+
                 <FormInput
+
                   name="lastName"
                   type="text"
                   label="Last Name"
                   placeholder="Last Name"
+
                   value={values.lastName}
                   error={errors.lastName}
                   isError={!!touched.lastName && !!errors.lastName}
+
                   handleChange={handleChange}
                   handleBlur={handleBlur}
                 />
@@ -149,15 +157,18 @@ const Register = () => {
                 {/* no hp */}
                 <FormInput
                   name="phoneNumber"
+
                   type="number"
                   label="Phone Number"
                   placeholder="Phone Number"
                   value={values.phoneNumber}
                   error={errors.phoneNumber}
                   isError={!!touched.phoneNumber && !!errors.phoneNumber}
+
                   handleChange={handleChange}
                   handleBlur={handleBlur}
                 />
+
 
                 {/* grade */}
                 <Form {...form}>
@@ -210,6 +221,7 @@ const Register = () => {
                     />
                   </form>
                 </Form>
+
               </div>
             </form>
           </CardContent>
