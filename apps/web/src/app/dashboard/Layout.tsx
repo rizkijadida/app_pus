@@ -1,28 +1,20 @@
-'use client';
-import { Footer } from '@/components/Footer';
-import SideBar from './SideBar';
 
-type LayoutProps = {
-  children: React.ReactNode;
-};
+"use client";
 
-const DashboardLayout: React.FC<LayoutProps> = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+import SideBar from "./SideBar";
+
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      {' '}
-      <body className="flex flex-row">
-        <div className="flex row-span-1">
-          <SideBar />
+      <section>
+        <div className="h-[180vh] grid grid-cols-8">
+          <div className="col-span-1">
+            <SideBar />
+          </div>
+          <div className="col-span-7">{children}</div>   
         </div>
-        {children}
-        <Footer />
-      </body>
+      </section>
     </>
   );
-};
+}
 
-export default DashboardLayout;

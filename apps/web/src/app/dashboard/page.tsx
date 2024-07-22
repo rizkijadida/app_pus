@@ -1,13 +1,9 @@
-'use client';
 
-
+"use client";
 
 const Dashboard = () => {
-  return (
-    <div className="">
-      dasdcdafas
-    </div>
-  );
+  return <div></div>;
+
 };
 
 export default Dashboard;

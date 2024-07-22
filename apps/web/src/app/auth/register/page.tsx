@@ -1,6 +1,7 @@
-'use client';
-import FormInput from '@/components/FormInput';
-import { Button } from '@/components/ui/button';
+
+"use client";
+import FormInput from "@/components/FormInput";
+import { Button } from "@/components/ui/button";
 import {
 
   Card,
@@ -9,17 +10,19 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
-import useRegister from '@/hooks/api/auth/useRegister';
-import { useFormik } from 'formik';
-import { useRouter } from 'next/navigation';
-import { validationSchema } from './validationSchema';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+} from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import useRegister from "@/hooks/api/auth/useRegister";
+import { useFormik } from "formik";
+import { useRouter } from "next/navigation";
+import { validationSchema } from "./validationSchema";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
 
 import {
   Form,
@@ -28,20 +31,26 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
+
+} from "@/components/ui/form";
+
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { toast } from '@/components/ui/use-toast';
+
+} from "@/components/ui/select";
+import { toast } from "@/components/ui/use-toast";
+
 
 const FormSchema = z.object({
   email: z
     .string({
-      required_error: 'Please select an email to display.',
+
+      required_error: "Please select an email to display.",
+
     })
     .email(),
 });
@@ -52,12 +61,16 @@ const Register = () => {
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
     useFormik({
       initialValues: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        phoneNumber: '',
-        level: '',
+
+        firstName: "",
+        lastName: "",
+        email: "",
+        address: "",
+        dateOfBirth: "",
+        password: "",
+        phoneNumber: "",
+        level: "",
+
       },
       validationSchema,
       onSubmit: (values) => {
@@ -71,7 +84,9 @@ const Register = () => {
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({
-      title: 'You submitted the following values:',
+
+      title: "You submitted the following values:",
+
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
@@ -81,15 +96,17 @@ const Register = () => {
   }
 
   return (
-    <main className="container mx-auto h-[200vh] px-4 bg-gradient-to-r from-[#2853b2] to-[#1c71cd]">
-      <div className=" flex justify-center">
-        <Card className="w-[350px] my-20">
+    <main className="container mx-auto h-[200vh] bg-gradient-to-r from-[#2853b2] to-[#1c71cd] px-4">
+      <div className="flex justify-center">
+        <Card className="my-20 w-[350px]">
 
           <CardHeader>
             <CardTitle className="text-center text-3xl text-primary">
               SIGN UP
             </CardTitle>
-            <CardDescription className="text-black text-center">
+
+            <CardDescription className="text-center text-black">
+
               Welcome To Puskanas
             </CardDescription>
           </CardHeader>
@@ -97,6 +114,8 @@ const Register = () => {
             <form onSubmit={handleSubmit}>
               <div className="grid w-full items-center gap-4">
                 {/* firstName */}
+
+                <FormInput
 
                   name="firstName"
                   type="text"
@@ -110,6 +129,8 @@ const Register = () => {
                 />
 
                 {/* lastName */}
+
+                <FormInput
 
                   name="lastName"
                   type="text"
@@ -164,7 +185,6 @@ const Register = () => {
                   handleChange={handleChange}
                   handleBlur={handleBlur}
                 />
-
 
                 {/* grade */}
                 <Form {...form}>
@@ -221,8 +241,9 @@ const Register = () => {
               </div>
             </form>
           </CardContent>
-          <div className="flex justify-between mx-6">
-            <div className="flex items-center space-x-2 ">
+          <div className="mx-6 flex justify-between">
+            <div className="flex items-center space-x-2">
+
               <Checkbox id="terms" />
               <Label htmlFor="terms" className="text-end text-xs">
                 Remember Me?
@@ -230,7 +251,9 @@ const Register = () => {
             </div>
             <p
               className="cursor-pointer text-end text-xs"
-              onClick={() => router.push('/forgot-password')}
+
+              onClick={() => router.push("/forgot-password")}
+
             >
               forgot password?
             </p>
@@ -241,8 +264,10 @@ const Register = () => {
                 Sign In
               </Button>
               <p className="text-end text-xs">
-                Dont have account?{' '}
-                <a href="/register" className="cursor-pointer ">
+
+                Dont have account?{" "}
+                <a href="/register" className="cursor-pointer">
+
                   click here to sign up
                 </a>
               </p>
