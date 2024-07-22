@@ -98,8 +98,6 @@ const Register = () => {
               <div className="grid w-full items-center gap-4">
                 {/* firstName */}
 
-                <FormInput
-
                   name="firstName"
                   type="text"
                   label="First Name"
@@ -112,8 +110,6 @@ const Register = () => {
                 />
 
                 {/* lastName */}
-
-                <FormInput
 
                   name="lastName"
                   type="text"
