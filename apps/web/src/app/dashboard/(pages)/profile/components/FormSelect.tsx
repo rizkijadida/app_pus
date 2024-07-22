@@ -1,6 +1,7 @@
 "use client";
+import { Label } from "@/components/ui/label";
 import React from "react";
-import { Label } from "./ui/label";
+
 
 export interface FormSelectProps {
   id: string;
@@ -33,7 +34,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
         value={value}
         onChange={onChange}
         disabled={disabled}
-        className="block w-full rounded-md border border-[#1c71cd] py-4 pl-3 pr-10 text-base focus:border-[#1c71cd] sm:text-sm"
+        className="block w-full rounded-md border border-[#1c71cd] py-[11px] pl-3 pr-[350px] text-base focus:border-[#1c71cd] sm:text-sm"
       >
         {placeholder && <option value="">{placeholder}</option>}
         {options.map((option) => (

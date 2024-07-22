@@ -22,8 +22,6 @@ const Login = () => {
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
     useFormik({
       initialValues: {
-        firstName: '',
-        lastName: '',
         email: '',
         password: '',
       },

@@ -1,9 +1,9 @@
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import React from 'react';
-import { CiMoneyCheck1 } from 'react-icons/ci';
-import { MdEventAvailable } from 'react-icons/md';
-import { PiCertificate } from 'react-icons/pi';
+import Link from "next/link";
+import React from "react";
+import { MdEventAvailable } from "react-icons/md";
+import { GrTransaction } from "react-icons/gr";
+import { TbCertificate } from "react-icons/tb";
+import { MdOutlineMessage } from "react-icons/md";
 
 interface NavigationProps {
   href: string;
@@ -13,7 +13,7 @@ interface NavigationProps {
 export const NavigationBar = ({ href, children }: NavigationProps) => {
   return (
     <Link href={href}>
-      <p className="flex cursor-pointer items-center gap-x-2 py-2 text-white transition duration-300 hover:text-gray-300">
+      <p className="flex cursor-pointer items-center gap-x-2 py-2 text-xs text-white transition duration-300 hover:text-gray-300">
         {children}
       </p>
     </Link>
@@ -22,26 +22,39 @@ export const NavigationBar = ({ href, children }: NavigationProps) => {
 
 const SideBar = () => {
   return (
-    <main className="container mx-auto h-[90vh] px-4 bg-gradient-to-r from-[#2853b2] to-[#1c71cd]">
-      <div className="grid justify-center text-white h-96 mx-0 grid-cols-8">
-        <div className="col-span-1">
-          <div className="flex flex-col mt-3 items-center  space-y-2">
-            <h6 className="text-xs m-3">DASHBOARD</h6>
-            <NavigationBar href={'dashboard/event'}>
+    <main className="container h-[90vh] bg-gradient-to-r from-[#2853b2] to-[#1c71cd]">
+      <div className="sticky justify-center text-white">
+        <div className="flex flex-col items-center space-y-2">
+          <h6 className="m-3 text-xs">DASHBOARD</h6>
+          <div className="flex flex-col gap-y-4">
+            <NavigationBar href={"dashboard/event"}>
               <MdEventAvailable />
               Event
             </NavigationBar>
-            <Button variant={'ghost'} className="flex items-center gap-1">
-              <CiMoneyCheck1 />
+            <NavigationBar href={"dashboard/transaction"}>
+              <GrTransaction />
               Transaction
-            </Button>
-            <Button variant={'ghost'} className="flex items-center gap-1">
-              <PiCertificate />
-              Sertifikat
-            </Button>
+            </NavigationBar>
+            <NavigationBar href={"dashboard/certificate"}>
+              <TbCertificate />
+              Certificate
+            </NavigationBar>
+            <NavigationBar href={"dashboard/certificate"}>
+              <TbCertificate />
+              TimeTable
+            </NavigationBar>
+            <NavigationBar href={"dashboard/certificate"}>
+              <TbCertificate />
+              History
+            </NavigationBar>
           </div>
         </div>
-        <div className="col-span-7"></div>
+        <div className="mt-8 flex items-center justify-center">
+          <NavigationBar href={"dashboard/contact-us"}>
+            <MdOutlineMessage />
+            Contact Us
+          </NavigationBar>
+        </div>
       </div>
     </main>
   );
