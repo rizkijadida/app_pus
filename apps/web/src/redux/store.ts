@@ -2,11 +2,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import userReducer from "./slices/user/userSlice"
 import tabSlice from './slices/tab/tabSlice'
 
+
 export const makeStore = () => {
   return configureStore({
     reducer: {
       user: userReducer,
+
       tab: tabSlice
+
     }
   })
 }

@@ -7,5 +7,6 @@ export interface User {
   address: string;
   level: any;
   postalCode: string;
+
   email: string;
 }

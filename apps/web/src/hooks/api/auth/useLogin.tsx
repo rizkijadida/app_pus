@@ -5,7 +5,9 @@ import { User } from '@/types/user.types';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 
+
 interface LoginArgs extends Omit<User, 'id' | 'firstName' | 'lastName' | 'gender' | "level" | "dateOfBirth" | "address" | "postalCode"> {
+
   password: string;
 }
 

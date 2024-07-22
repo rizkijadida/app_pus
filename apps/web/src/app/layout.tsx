@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -6,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import StoreProvider from "@/providers/storeProvider";
 import { AuthProvider } from "@/providers/authProvider";
 import { BrowserRouter } from "react-router-dom";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,12 +25,16 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <StoreProvider>
+
           {" "}
+
           <AuthProvider>
             <Header />
             {children}
             <Footer />
+
           </AuthProvider>{" "}
+
         </StoreProvider>
       </body>
     </html>

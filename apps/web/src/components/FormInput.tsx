@@ -12,7 +12,9 @@ interface FormInputProps {
   type: HTMLInputTypeAttribute;
   handleChange: FormikHandlers['handleChange'];
   handleBlur: FormikHandlers['handleBlur'];
+
   value: string | number;
+
   isError: boolean;
   error: string | undefined;
 }

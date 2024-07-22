@@ -41,10 +41,12 @@ model User {
   lastName    String
   email       String
   password    String
+
   Image       String
   address     String
   dateOfBirth DateTime
   postalCode  String
+
   phoneNumber String   @unique
   gender      Gender?
   level       Level

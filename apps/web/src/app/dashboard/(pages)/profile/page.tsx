@@ -1,3 +1,4 @@
+
 "use client"
 import { validationSchema } from "@/app/dashboard/(pages)/profile/validationSchema";
 
@@ -92,6 +93,7 @@ const Profile = () => {
       </div>
     </div>
   </div>
+
   )
 }
 
