@@ -17,7 +17,7 @@ interface FormInputProps {
   error: string | undefined;
 }
 
-const FormInput: React.FC<FormInputProps> = ({
+const FormInputt: React.FC<FormInputProps> = ({
   name,
   label,
   placeholder,
@@ -40,11 +40,12 @@ const FormInput: React.FC<FormInputProps> = ({
         onBlur={handleBlur}
         onChange={handleChange}
         value={value}
-        className={isError ? 'border-red-500' : ''}
+        className={isError ? 'border-red-500' : ''} 
+        
       />
-      {isError ? <div className="text-xs text-red-500">{error}</div> : null}
+      {isError ? <div className="text-xs text-red-500 w-[72vh]">{error}</div> : null}
     </div>
   );
 };
 
-export default FormInput;
+export default FormInputt;

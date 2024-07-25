@@ -16,7 +16,7 @@ export const Header = () => {
     <nav className="container sticky top-0 z-50 mx-auto bg-[#1c71cd] px-4">
       <div className="">
         <div className="flex items-center justify-between py-2">
-          <h1>Logo</h1>
+          <h1 className="cursor-pointer" onClick={() => router.push('/')}>Logo</h1>
 
           {Boolean(id) ? (
             <div className="flex items-center gap-8">

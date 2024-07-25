@@ -1,5 +1,5 @@
 "use client";
-import FormInput from "@/components/FormInput";
+import FormInput from "@/components/FormInputt";
 import { Button } from "@/components/ui/button";
 import {
   Card,

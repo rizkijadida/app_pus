@@ -1,9 +1,11 @@
+"use client"
 import Link from "next/link";
 import React from "react";
 import { MdEventAvailable } from "react-icons/md";
 import { GrTransaction } from "react-icons/gr";
 import { TbCertificate } from "react-icons/tb";
 import { MdOutlineMessage } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 interface NavigationProps {
   href: string;
@@ -21,11 +23,12 @@ export const NavigationBar = ({ href, children }: NavigationProps) => {
 };
 
 const SideBar = () => {
+  const router = useRouter()
   return (
     <main className="container h-[90vh] bg-gradient-to-r from-[#2853b2] to-[#1c71cd]">
       <div className="sticky justify-center text-white">
         <div className="flex flex-col items-center space-y-2">
-          <h6 className="m-3 text-xs">DASHBOARD</h6>
+          <h6 className="m-3 text-xs cursor-pointer" onClick={() => router.push('/dashboard')}>DASHBOARD</h6>
           <div className="flex flex-col gap-y-4">
             <NavigationBar href={"dashboard/event"}>
               <MdEventAvailable />
@@ -34,10 +37,6 @@ const SideBar = () => {
             <NavigationBar href={"dashboard/transaction"}>
               <GrTransaction />
               Transaction
-            </NavigationBar>
-            <NavigationBar href={"dashboard/certificate"}>
-              <TbCertificate />
-              Certificate
             </NavigationBar>
             <NavigationBar href={"dashboard/certificate"}>
               <TbCertificate />

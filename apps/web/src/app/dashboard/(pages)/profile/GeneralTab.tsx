@@ -7,31 +7,19 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 import * as React from "react";
 
-import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
-import useGetProfile from "@/hooks/api/dashboard/useGetProfile";
-import { useFormik } from "formik";
-import FormSelect from "./components/FormSelect";
-import FormInput from "./components/FormInput";
-import Tooltip from "./components/Tooltip";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import useGetProfile from "@/hooks/api/dashboard/useGetProfile";
+import { useFormik } from "formik";
 import { PiStudent } from "react-icons/pi";
+import FormInput from "./components/FormInput";
+import FormInputt from "@/components/FormInputt";
+import Tooltip from "./components/Tooltip";
 
 interface GeneralProps {}
 
 const GeneralTab: React.FC<GeneralProps> = () => {
-  const [selectedValue, setSelectedValue] = React.useState<string>("option1");
-
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedValue(event.target.value);
-  };
-
-  const options = [
-    { value: "Medan", label: "Medan" },
-    { value: "Jakarta", label: "Jakarta" },
-    { value: "Jogja", label: "Jogja" },
-  ];
 
   const { getProfile } = useGetProfile();
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
@@ -80,24 +68,27 @@ const GeneralTab: React.FC<GeneralProps> = () => {
             </Badge>
           </div>
 
-          <div className="mt-4 flex items-center justify-between">
-            <FormSelect
-              id="example-select"
-              label="City"
-              options={options}
-              value={selectedValue}
-              onChange={handleSelectChange}
-              placeholder="city"
+          <div className="mt-4 flex items-center justify-between ">
+            <FormInputt
+              name="firstName"
+              type="string"
+              label="First Name"
+              placeholder="First Name"
+              value={values.firstName}
+              error={errors.firstName}
+              isError={!!touched.firstName && !!errors.firstName}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
             />
 
             <FormInput
-              name="postalCode"
-              type="number"
-              label="Postal Code"
-              placeholder="Postal Code"
-              value={values.postalCode}
-              error={errors.postalCode}
-              isError={!!touched.postalCode && !!errors.postalCode}
+              name="lastName"
+              type="string"
+              label="Last Name"
+              placeholder="Last Name"
+              value={values.lastName}
+              error={errors.lastName}
+              isError={!!touched.lastName && !!errors.lastName}
               handleChange={handleChange}
               handleBlur={handleBlur}
             />
