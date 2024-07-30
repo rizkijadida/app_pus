@@ -28,7 +28,7 @@ import CertificateModal from "./components/CertificateModal";
 import { FaBook } from "react-icons/fa";
 import DeedModal from "./components/DeedModal";
 
-const CardComponent = () => {
+const History = () => {
   const router = useRouter();
   const cards = [
     {
@@ -315,5 +315,5 @@ const CardComponent = () => {
       )}
 </div>
   )}
-export default CardComponent;
+export default History;
 
