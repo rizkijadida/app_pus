@@ -1,3 +1,4 @@
+
 "use client";
 import {
   AlertDialog,
@@ -312,8 +313,7 @@ const CardComponent = () => {
           <Button onClick={handleLoadMore}>Load More</Button>
         </div>
       )}
-    </div>
-  );
-};
-
+</div>
+  )}
 export default CardComponent;
+

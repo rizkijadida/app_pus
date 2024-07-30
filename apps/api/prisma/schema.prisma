@@ -41,10 +41,18 @@ model User {
   lastName    String
   email       String
   password    String
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
   Image       String
   address     String
   dateOfBirth DateTime
   postalCode  String
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
   phoneNumber String   @unique
   gender      Gender?
   level       Level

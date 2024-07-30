@@ -1,5 +1,9 @@
 'use client';
+<<<<<<< HEAD
 import FormInput from '@/components/FormInputt';
+=======
+import FormInput from '@/components/FormInput';
+>>>>>>> origin/main
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -22,6 +26,11 @@ const Login = () => {
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
     useFormik({
       initialValues: {
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/main
         email: '',
         password: '',
       },
@@ -31,9 +40,17 @@ const Login = () => {
       },
     });
   return (
+<<<<<<< HEAD
     <main className="container mx-auto h-[100vh] px-4 bg-gradient-to-r from-[#2853b2] to-[#1c71cd]">
       <div className=" flex justify-center">
         <Card className="w-[350px] my-20">
+=======
+
+    <main className="container mx-auto h-[100vh] px-4 bg-gradient-to-r from-[#2853b2] to-[#1c71cd]">
+      <div className=" flex justify-center">
+        <Card className="w-[350px] my-20">
+
+>>>>>>> origin/main
           <CardHeader>
             <CardTitle className="text-center text-3xl text-primary">
               SIGN IN

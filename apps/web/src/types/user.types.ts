@@ -7,5 +7,9 @@ export interface User {
   address: string;
   level: any;
   postalCode: string;
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
   email: string;
 }
