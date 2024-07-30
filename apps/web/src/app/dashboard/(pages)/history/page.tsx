@@ -210,7 +210,7 @@ const CardComponent = () => {
                                     Prov. Marendal Barat - SMA IT IBNU HAFIDZ
                                   </p>
                                   <p className="text-xs text-gray-600">
-                                    Peraih Medali Emas
+                                    Peraih Medali Emas e
                                   </p>
                                 </div>
                                 <Button
