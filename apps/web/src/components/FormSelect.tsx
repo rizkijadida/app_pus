@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/main
 "use client";
 import React from "react";
 import { Label } from "./ui/label";

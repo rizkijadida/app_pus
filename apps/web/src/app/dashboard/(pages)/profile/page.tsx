@@ -7,7 +7,7 @@ import useGetProfile from "@/hooks/api/dashboard/useGetProfile";
 import { useFormik } from "formik";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-
+import { CgProfile } from "react-icons/cg";
 import * as React from "react";
 
 import GeneralTab from "@/app/dashboard/(pages)/profile/GeneralTab";
@@ -45,7 +45,8 @@ const Profile = () => {
         <p className="text-slate-600">Dashboard</p>
         <p className="text-[#1c71cd]"> / Profile</p>
       </div>
-      <div>
+      <div className="flex items-center space-x-3">
+      <CgProfile />
         <h4 className="font-bold">Profile</h4>
       </div>
       <div>

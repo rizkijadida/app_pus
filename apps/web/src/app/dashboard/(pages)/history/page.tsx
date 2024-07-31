@@ -2,31 +2,28 @@
 "use client";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
-  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
+  AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { FaMedal, FaPaperPlane } from "react-icons/fa";
+import { FaBook, FaMedal, FaPaperPlane } from "react-icons/fa";
 import { IoMdMedal } from "react-icons/io";
 import { IoArrowBackOutline } from "react-icons/io5";
 import { LuGanttChartSquare, LuHistory } from "react-icons/lu";
 import { SiBookstack } from "react-icons/si";
 import { TbCertificate } from "react-icons/tb";
-import SearchButton from "./components/SearchButton";
-import { useRouter } from "next/navigation";
 import CertificateModal from "./components/CertificateModal";
-import { FaBook } from "react-icons/fa";
 import DeedModal from "./components/DeedModal";
+import SearchButton from "./components/SearchButton";
 
 const History = () => {
   const router = useRouter();
