@@ -6,7 +6,7 @@ import {
   AlertDialogDescription,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
+  AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -24,6 +24,7 @@ import CertificateModal from "./components/CertificateModal";
 import DeedModal from "./components/DeedModal";
 import SearchButton from "./components/SearchButton";
 import { Separator } from "@/components/ui/separator";
+
 
 const History = () => {
   const router = useRouter();
