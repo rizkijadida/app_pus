@@ -10,11 +10,6 @@ export const KeepLoginService = async (id: number) => {
         throw new Error("invalid user Id")
     }
     
-
-
-
-
-
     return {
         message: "keep login succes",
         data:user

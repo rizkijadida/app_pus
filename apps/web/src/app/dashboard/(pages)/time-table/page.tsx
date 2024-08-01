@@ -240,7 +240,6 @@ const TimeTable = () => {
               </form>
             </CardContent>
           </Card>
-
           <Card className="grid w-[500px] grid-cols-3 border-blue-300 shadow-xl">
             <div className="col-span-1 flex flex-col">
               <div className="relative h-32 w-32">

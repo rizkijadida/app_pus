@@ -1,41 +1,36 @@
-import { User } from '@/types/user.type';
 import prisma from '../../prisma';
 import { hashedPassword } from '../../lib/bcrypt';
-import { Prisma } from '@prisma/client';
+import { User } from '@prisma/client';
 
 export const RegisterService = async (
-  body: Omit<User, 'id' | 'image' | 'gender'>,
+  body: Omit<User, 'id' | 'userDetail' | 'createdAt' | 'updatedAt'>,
 ) => {
   try {
-    const { email, password, phoneNumber, level } = body;
+    const { email, password, phoneNumber } = body;
 
     const existingUser = await prisma.user.findFirst({
       where: { email },
     });
+
     if (existingUser) {
-      throw new Error('email already exist');
+      throw new Error('Email already exists');
     }
 
-    const existingphoneNumber = await prisma.user.findFirst({
-      where: { phoneNumber: phoneNumber },
+    const existingPhoneNumber = await prisma.user.findFirst({
+      where: { phoneNumber },
     });
 
-    if (existingphoneNumber) {
-      return { message: 'nomber has been registerred' };
-    }
-    if (
-      !phoneNumber ||
-      phoneNumber.length < 10 ||
-      phoneNumber.length > 15 ||
-      isNaN(parseInt(phoneNumber))
-    ) {
-      return { message: 'invalid phone number' };
+    if (existingPhoneNumber) {
+      return { message: 'Phone number has been registered' };
     }
 
     const hashPassword = await hashedPassword(password);
 
     const newUser = await prisma.user.create({
-      data: { ...body, password: hashPassword },
+      data: {
+        ...body,
+        password: hashPassword,
+      },
     });
 
     return {
