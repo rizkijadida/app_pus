@@ -1,3 +1,4 @@
+
 import { Separator } from "@/components/ui/separator";
 import { GrTransaction } from "react-icons/gr";
 import { LuUpload } from "react-icons/lu";
@@ -23,7 +24,9 @@ const Transaction = () => {
         </div>
         <div className="flex items-center space-x-3">
           <GrTransaction />
+
           <h4 className="font-bold">Daftar Transaksi</h4>
+
         </div>
         <Separator className="bg-[#1c71cd]" />
 
@@ -54,7 +57,6 @@ const Transaction = () => {
             </TableBody>
           </Table>
         </div>
-
       </div>
     </div>
   );
