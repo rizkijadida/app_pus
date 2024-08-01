@@ -36,28 +36,60 @@ enum Level {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
+  id          Int          @id @default(autoincrement())
   firstName   String
   lastName    String
   email       String
   password    String
-<<<<<<< HEAD
-=======
+  phoneNumber String       @unique
+  gender      Gender
+  level       Level
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  UserDetail  UserDetail[]
 
->>>>>>> origin/main
-  Image       String
+  @@map("users")
+}
+
+model UserDetail {
+  id          Int      @id @default(autoincrement())
+  image       String
   address     String
   dateOfBirth DateTime
   postalCode  String
-<<<<<<< HEAD
-=======
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int      @unique
+  Cart       Cart[]
 
->>>>>>> origin/main
-  phoneNumber String   @unique
-  gender      Gender?
-  level       Level
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  @@map("usersDetails")
+}
 
-  @@map("users")
+model Cart {
+  id           Int        @id @default(autoincrement())
+  userDetailId Int        @unique
+  UserDetail   UserDetail @relation(fields: [userDetailId], references: [id])
+  CartItem     CartItem[]
+
+  @@map("carts")
+}
+
+model CartItem {
+  id        Int     @id @default(autoincrement())
+  Cart      Cart   @relation(fields: [chartId], references: [id])
+  chartId   Int
+  quantity  Int
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@map("cartItems")
+}
+
+model Product {
+  id    Int    @id @default(autoincrement())
+  name  String
+  price Float
+
+  CartItem CartItem[]
+
+  @@map("products")
 }
