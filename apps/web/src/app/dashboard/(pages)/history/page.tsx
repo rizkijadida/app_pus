@@ -25,7 +25,6 @@ import DeedModal from "./components/DeedModal";
 import SearchButton from "./components/SearchButton";
 import { Separator } from "@/components/ui/separator";
 
-
 const History = () => {
   const router = useRouter();
   const cards = [
