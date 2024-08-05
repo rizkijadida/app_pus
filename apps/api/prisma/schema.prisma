@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  // previewFeatures = ["multiSchema"]
 }
 
 datasource db {
@@ -36,46 +37,127 @@ enum Level {
 }
 
 model User {
-  id          Int          @id @default(autoincrement())
-  firstName   String
-  lastName    String
-  email       String
-  password    String
-  phoneNumber String       @unique
-  gender      Gender
-  level       Level
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  UserDetail  UserDetail[]
+  id              Int      @id @default(autoincrement())
+  firstName       String
+  lastName        String
+  email           String
+  password        String?
+  profileImageUrl String?
+  isVerified      Boolean? @default(false)
+  iseDelete       Boolean
+  dateOfBirth     String?
+  phoneNumber     String?  @unique
+  gender          Gender
+  level           Level
+  token           String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Adress    Adress[]
+  Cart      Cart[]
+  Event     Event[]
 
   @@map("users")
 }
 
-model UserDetail {
-  id          Int      @id @default(autoincrement())
-  image       String
-  address     String
-  dateOfBirth DateTime
-  postalCode  String
-  user        User     @relation(fields: [userId], references: [id])
-  userId      Int      @unique
-  Cart       Cart[]
+model Adress {
+  id                Int           @id @default(autoincrement())
+  name              String?
+  street            String?
+  kabupatenKota     KabupatenKota @relation(fields: [kabupatenKotaId], references: [id])
+  province          Province      @relation(fields: [provinceId], references: [id])
+  kecamatan         Kecamatan     @relation(fields: [kecamatanId], references: [id])
+  kelurahan_Or_Desa String
+  rt                Float
+  rw                Float
+  postalCode        Float?
+  isPrimary         Boolean       @default(false)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
 
-  @@map("usersDetails")
+  userId          Int
+  user            User    @relation(fields: [userId], references: [id])
+  Order           Order[]
+  kecamatanId     Int
+  provinceId      Int
+  kabupatenKotaId Int
+
+  @@map("addresses")
+}
+
+model Order {
+  id            Int         @id @default(autoincrement())
+  orderStatus   OrderStatus
+  total         Int
+  shippingCost  Int
+  payment       payment     @relation(fields: [paymentId], references: [id])
+  paymentId     Int
+  adress        Adress      @relation(fields: [adressId], references: [id])
+  adressId      Int
+  snapToken     String      @db.VarChar(255)
+  snapDirectUrl String      @db.VarChar(255)
+
+  @@map("orders")
+}
+
+model payment {
+  id              Int      @id @default(autoincrement())
+  invvoiceNumber  String   @unique
+  snapToken       String?
+  snapRedirectUrl String?
+  paymentProof    String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  Order           Order[]
+
+  @@map("payments")
+}
+
+enum OrderStatus {
+  PENDING
+  EXPIRES_IN
+  ON_PROGRESS
+  ON_SHIPPING
+  DONE
+  CANCEL
 }
 
 model Cart {
-  id           Int        @id @default(autoincrement())
-  userDetailId Int        @unique
-  UserDetail   UserDetail @relation(fields: [userDetailId], references: [id])
-  CartItem     CartItem[]
+  id       Int     @id @default(autoincrement())
+  quantity Int
+  product  Product @relation(fields: [productId], references: [id])
+  user     User    @relation(fields: [userId], references: [id])
+  items    Item    @relation(fields: [itemId], references: [id])
+
+  CartItem  CartItem[]
+  itemId    Int
+  userId    Int
+  productId Int
 
   @@map("carts")
 }
 
+model Item {
+  id              Int           @id @default(autoincrement())
+  categoryPaket   CategoryPaket @relation(fields: [categoryPaketId], references: [id])
+  isDelete        Boolean       @default(false)
+  Cart            Cart[]
+  categoryPaketId Int
+
+  @@map("items")
+}
+
+model CategoryPaket {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  Item Item[]
+
+  @@map("categoryPaket")
+}
+
 model CartItem {
   id        Int     @id @default(autoincrement())
-  Cart      Cart   @relation(fields: [chartId], references: [id])
+  Cart      Cart    @relation(fields: [chartId], references: [id])
   chartId   Int
   quantity  Int
   productId Int
@@ -90,6 +172,116 @@ model Product {
   price Float
 
   CartItem CartItem[]
+  Cart     Cart[]
 
   @@map("products")
+}
+
+// opschema
+
+model Event {
+  id                Int                @id @default(autoincrement())
+  name              String
+  image             String
+  twibbon           String
+  eventDate         DateTime
+  startEventDate    DateTime
+  lastTimeEventDate DateTime
+  maxStudyField     Int
+  linkJuknis        String
+  user              User               @relation(fields: [userId], references: [id])
+  registrationMetod RegistrationMethod
+  targetPeserta     TargetPeserta
+  tipeEvent         TipeEvent
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  userId            Int
+
+  @@map("events")
+}
+
+enum RegistrationMethod {
+  GRATIS
+  BERBAYAR
+  HYBRID
+}
+
+enum EventStatus {
+  PUBLISH
+  PRIVATE
+}
+
+enum TargetPeserta {
+  SISWA
+  MAHASISWA
+  GURU
+}
+
+enum TipeEvent {
+  NASIONAL
+  NASIONALBERJENJANG
+  REGIONALPROVINSI
+  REGIONALKABUPATENKOTA
+}
+
+model Province {
+  id            Int             @id @default(autoincrement())
+  name          String
+  KabupatenKota KabupatenKota[]
+  Adress        Adress[]
+
+  @@map("regional-provinsi")
+}
+
+model KabupatenKota {
+  id         Int         @id @default(autoincrement())
+  name       String      @db.VarChar(255)
+  postalCode String?     @db.Char(5)
+  province   Province    @relation(fields: [provinceId], references: [id])
+  provinceId Int
+  Kecamatan  Kecamatan[]
+  Adress     Adress[]
+
+  @@map("regional-kabupaten-kota")
+}
+
+model Kecamatan {
+  id              Int           @id @default(autoincrement())
+  name            String?
+  kabupatenKota   KabupatenKota @relation(fields: [kabupatenKotaId], references: [id])
+  kabupatenKotaId Int
+  Adress          Adress[]
+
+  @@map("kecamatan")
+}
+
+model Soal {
+  id          Int         @id @default(autoincrement())
+  name        String
+  jenjangSoal JenjangSoal
+
+  @@map("soal")
+}
+
+enum JenjangSoal {
+  SD
+  SMP
+  SMA
+}
+
+model JawabanSoal {
+  id          Int         @id @default(autoincrement())
+  name        String
+  jenjangSoal JenjangSoal
+
+  @@map("jawabanSoal")
+}
+
+model Admin {
+  id       Int    @id @default(autoincrement())
+  fullName String
+  email    String
+  password String
+
+  @@map("admins")
 }
