@@ -37,27 +37,34 @@ enum Level {
 }
 
 model User {
-  id              Int      @id @default(autoincrement())
-  firstName       String
-  lastName        String
-  email           String
-  password        String?
-  profileImageUrl String?
-  isVerified      Boolean? @default(false)
-  iseDelete       Boolean
-  dateOfBirth     String?
-  phoneNumber     String?  @unique
-  gender          Gender
+  id         Int      @id @default(autoincrement())
+  firstName  String
+  lastName   String
+  email      String
+  password   String
   level           Level
-  token           String
+  isVerified Boolean? @default(false)
+  iseDeleted Boolean?
+  token      String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Adress    Adress[]
-  Cart      Cart[]
-  Event     Event[]
+  Cart  Cart[]
+  Event Event[]
 
   @@map("users")
+}
+
+model UserDetail {
+  id              Int      @id @default(autoincrement())
+  userId          Int      @unique
+  profileImageUrl String?
+  dateOfBirth     String?
+  gender          Gender?
+  Adress          Adress[]
+  phoneNumber     String?  @unique
+
+  @@map("userDetails")
 }
 
 model Adress {
@@ -76,7 +83,7 @@ model Adress {
   updatedAt         DateTime      @updatedAt
 
   userId          Int
-  user            User    @relation(fields: [userId], references: [id])
+  userDetail      UserDetail @relation(fields: [userId], references: [id])
   Order           Order[]
   kecamatanId     Int
   provinceId      Int

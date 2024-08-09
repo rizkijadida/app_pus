@@ -1,11 +1,10 @@
+import ConditionalHeader from "@/components/ConditionalHeader";
+import { Footer } from "@/components/Footer";
+import { AuthProvider } from "@/providers/authProvider";
+import StoreProvider from "@/providers/storeProvider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import StoreProvider from "@/providers/storeProvider";
-import { AuthProvider } from "@/providers/authProvider";
-import { BrowserRouter } from "react-router-dom";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +24,7 @@ export default function RootLayout({
         <StoreProvider>
           {" "}
           <AuthProvider>
-            <Header />
+            <ConditionalHeader />
             {children}
             <Footer />
           </AuthProvider>{" "}

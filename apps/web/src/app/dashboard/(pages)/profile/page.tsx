@@ -1,15 +1,9 @@
 "use client"
-import { validationSchema } from "@/app/dashboard/(pages)/profile/validationSchema";
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import useGetProfile from "@/hooks/api/dashboard/useGetProfile";
-import { useFormik } from "formik";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
 import { CgProfile } from "react-icons/cg";
-import * as React from "react";
-
 import GeneralTab from "@/app/dashboard/(pages)/profile/GeneralTab";
 import PrivacyTab from "@/app/dashboard/(pages)/profile/PrivacyTab";
 import SecurityTab from "@/app/dashboard/(pages)/profile/SecurityTab";

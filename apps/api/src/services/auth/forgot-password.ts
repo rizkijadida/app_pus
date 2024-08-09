@@ -1,10 +1,10 @@
-import { transpoter } from '@/lib/nodemailer';
 import prisma from '@/prisma';
-import { JWT_SECRET, NEXT_BASE_URL } from '@/utils/config';
 import { sign } from 'jsonwebtoken';
 import { join } from 'path';
 import fs from 'fs/promises';
 import Handlebars from 'handlebars';
+import { JWT_SECRET, NEXT_BASE_URL } from '@/config';
+import { transporter } from '@/lib/nodemailer';
 
 export const ForgotPassowrdService = async (email: string) => {
   try {
@@ -30,7 +30,7 @@ export const ForgotPassowrdService = async (email: string) => {
 
     const html = compileTemplate({ name: 'Rizki' });
 
-    await transpoter.sendMail({
+    await transporter.sendMail({
       from: 'rizkijadida@gmail.com',
       to: email,
       subject: 'Link Reset Password',
@@ -39,7 +39,7 @@ export const ForgotPassowrdService = async (email: string) => {
 
     return {
       message: 'email reset password has been sent',
-      data: transpoter,
+      data: transporter,
     };
   } catch (error) {
     throw error;

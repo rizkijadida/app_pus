@@ -1,9 +1,10 @@
 import { TokenExpiredError, verify } from "jsonwebtoken";
-import { appConfig } from "../utils/config";
+
 import { NextFunction, Request, Response } from "express";
 import { User } from "@prisma/client";
+import { JWT_SECRET } from "@/config";
 
-const secretKey = appConfig.jwtSecretKey!;
+const secretKey = JWT_SECRET;
 
 interface PayloadToken extends Pick<User, "id"> {}
 
@@ -20,7 +21,7 @@ export const verifyToken = (
     });
   }
 
-  verify(token, secretKey, (err, payload) => {
+  verify(token, secretKey, (err: any, payload:any) => {
     if (err) {
       if (err instanceof TokenExpiredError) {
         return res.status(401).send({ message: "token expired" });

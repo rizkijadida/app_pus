@@ -32,9 +32,11 @@ const FormInput: React.FC<FormInputProps> = ({
 }) => {
   return (
     <div className="flex flex-col space-y-1.5">
-      <Label htmlFor={name} className={isError ? 'text-red-500' : 'text-black'}>
+      <div className={isError ? 'text-red-500' : 'text-black'}>
+      <Label htmlFor={name} className='text-sm font-light'>
         {label}
       </Label>
+      </div>
       <Input
         name={name}
         type={type}
