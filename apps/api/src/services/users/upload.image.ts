@@ -1,16 +1,21 @@
 import prisma from "@/prisma"
-import { User } from "@/types/user.type"
+import { UserDetail } from "@/types/user.detail.type"
 
 
-export const UploadImageService = async (body:Pick<User, "image" | "id">) => {
+
+export const UploadImageService = async (body:Pick<UserDetail, "proifleImageUrl" | "userId">) => {
     try {
-        const {image, id} = body
+        const {proifleImageUrl, userId} = body
         const user = await prisma.user.update({
-            where: {id: id},
-            data: image
+            where: {id: userId},
+            data: proifleImageUrl
         })
 
-        if (!image) {
+        if(userId !== userId) {
+            throw new Error("error")
+        }
+
+        if (!proifleImageUrl) {
             throw new Error("no image uploaded")
         }
 

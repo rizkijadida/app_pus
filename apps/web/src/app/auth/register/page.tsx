@@ -1,9 +1,7 @@
-
 "use client";
 import FormInput from "@/components/FormInputt";
 import { Button } from "@/components/ui/button";
 import {
-
   Card,
   CardContent,
   CardDescription,
@@ -13,240 +11,159 @@ import {
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import useRegister from "@/hooks/api/auth/useRegister";
-import { useFormik } from "formik";
-import { useRouter } from "next/navigation";
-import { validationSchema } from "./validationSchema";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-
 } from "@/components/ui/select";
-import { toast } from "@/components/ui/use-toast";
+import useRegister from "@/hooks/api/auth/useRegister";
+import { useFormik } from "formik";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { validationSchema } from "./validationSchema";
+import { Loader2 } from "lucide-react";
 
-const FormSchema = z.object({
-  email: z
-    .string({
-      required_error: "Please select an email to display.",
-    })
-    .email(),
-});
 
-const Register = () => {
-  const router = useRouter();
-  const { register } = useRegister();
+const Register = () => { 
+  const { register, isLoading } = useRegister();
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
     useFormik({
       initialValues: {
         firstName: "",
         lastName: "",
         email: "",
-        address: "",
-        dateOfBirth: "",
         password: "",
-        phoneNumber: "",
         level: "",
       },
       validationSchema,
       onSubmit: (values) => {
-        register(values);
+        register(values)
       },
     });
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-  });
-
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-  }
-
   return (
-    <main className="container mx-auto h-[200vh] bg-gradient-to-r from-[#2853b2] to-[#1c71cd] px-4">
+    <main className="mt-relative container mx-auto h-[200vh] bg-gradient-to-r from-[#2853b2] to-[#1c71cd] px-4">
       <div className="flex justify-center">
-        <Card className="my-20 w-[350px]">
-          <CardHeader>
-            <CardTitle className="text-center text-3xl text-primary">
-              SIGN UP
-            </CardTitle>
-            <CardDescription className="text-center text-black">
-              Welcome To Puskanas
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit}>
-              <div className="grid w-full items-center gap-4">
-                {/* firstName */}
-                <FormInput
-                  name="firstName"
-                  type="text"
-                  label="First Name"
-                  placeholder="first Name"
-                  value={values.firstName}
-                  error={errors.firstName}
-                  isError={!!touched.firstName && !!errors.firstName}
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                />
+        <form onSubmit={handleSubmit}>
+          <Card className="h-relative my-20 w-[350px] bg-white">
+            <CardHeader>
+              <CardTitle className="text-primary text-center text-2xl">
+                SIGN UP
+              </CardTitle>
+              <CardDescription className="text-center text-sm text-black">
+                Welcome To Puskanas
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              <FormInput
+                name="email"
+                type="text"
+                label="Email"
+                placeholder="email"
+                value={values.email}
+                error={errors.email}
+                isError={!!touched.email && !!errors.email}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+              />
+               
 
-                {/* lastName */}
-                <FormInput
-                  name="lastName"
-                  type="text"
-                  label="Last Name"
-                  placeholder="Last Name"
-                  value={values.lastName}
-                  error={errors.lastName}
-                  isError={!!touched.lastName && !!errors.lastName}
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                />
+              {/* firstName */}
+              <FormInput
+                name="firstName"
+                type="text"
+                label="First Name"
+                placeholder="first Name"
+                value={values.firstName}
+                error={errors.firstName}
+                isError={!!touched.firstName && !!errors.firstName}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+              /> 
 
-                {/* email */}
-                <FormInput
-                  name="email"
-                  type="text"
-                  label="email"
-                  placeholder="email"
-                  value={values.email}
-                  error={errors.email}
-                  isError={!!touched.email && !!errors.email}
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                />
+              {/* lastName */}
+              <FormInput
+                name="lastName"
+                type="text"
+                label="Last Name"
+                placeholder="Last Name"
+                value={values.lastName}
+                error={errors.lastName}
+                isError={!!touched.lastName && !!errors.lastName}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+              /> 
 
-                {/* password */}
-                <FormInput
-                  name="password"
-                  type="password"
-                  label="password"
-                  placeholder="password"
-                  value={values.password}
-                  error={errors.password}
-                  isError={!!touched.password && !!errors.password}
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                />
+              {/* password */}
+              <FormInput
+                name="password"
+                type="password"
+                label="Password"
+                placeholder="password"
+                value={values.password}
+                error={errors.password}
+                isError={!!touched.password && !!errors.password}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+              /> 
 
-                {/* no hp */}
-                <FormInput
-                  name="phoneNumber"
-                  type="number"
-                  label="Phone Number"
-                  placeholder="Phone Number"
-                  value={values.phoneNumber}
-                  error={errors.phoneNumber}
-                  isError={!!touched.phoneNumber && !!errors.phoneNumber}
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                />
+              {/* grade */}
 
-                {/* grade */}
-                <Form {...form}>
-                  <form
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    className="w-7/8 -space-y-14"
-                  >
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Jenjang</FormLabel>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                          >
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Pilih Jenjang Anda" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="Siswa - SD/MI">
-                                Siswa - SD/MI
-                              </SelectItem>
-                              <SelectItem value="Siswa - SMP/MTs">
-                                Siswa - SMP/MTs
-                              </SelectItem>
-                              <SelectItem value="Siswa - SMA/MA/SMK">
-                                Siswa - SMA/MA/SMK
-                              </SelectItem>
-                              <SelectItem value="Mahasiswa">
-                                Mahasiswa
-                              </SelectItem>
-                              <SelectItem value="Guru - SD/MI">
-                                Guru - SD/MI
-                              </SelectItem>
-                              <SelectItem value="Guru - SMP/MTs">
-                                Guru - SMP/MTs
-                              </SelectItem>
-                              <SelectItem value="Guru - SMA/MA/SMK">
-                                Guru - SMA/MA/SMK
-                              </SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </form>
-                </Form>
+              <div className="flex w-[300px] flex-col">
+                {/* <div className={isError ? "text-red-500" : "text-black"}> */}
+                <Label htmlFor={"level"} className="fot-light text-sm">
+                  Jenjang
+                </Label>
+                {/* </div> */}
+                <Select onValueChange={(value) => handleChange({target: {name: 'level', value}})}>
+                  <SelectTrigger className="w-[300px] bg-white">
+                    <SelectValue placeholder="Jenjang" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white">
+                    <SelectItem value="SD">SD / MI</SelectItem>
+                    <SelectItem value="SMP">SMP / MTs</SelectItem>
+                    <SelectItem value="SMA">SMA / SMK / MA</SelectItem>
+                    <SelectItem value="MAHASISWA">Mahasiswa</SelectItem>
+                    <SelectItem value=" GURU_SD">Guru SD / MI</SelectItem>
+                    <SelectItem value="GURU_SMP">Guru SMP / MTs</SelectItem>
+                    <SelectItem value="GURU_SMA">
+                      Guru SMA / SMK / MA
+                    </SelectItem>
+                   
+                  </SelectContent>
+                </Select>
               </div>
-            </form>
-          </CardContent>
-          <div className="mx-6 flex justify-between">
-            <div className="flex items-center space-x-2">
-              <Checkbox id="terms" />
-              <Label htmlFor="terms" className="text-end text-xs">
-                Remember Me?
-              </Label>
+            </CardContent>
+            <div className="mx-6 flex justify-between">
+              <div className="flex items-center space-x-2">
+                <Checkbox id="terms" />
+                <Label htmlFor="terms" className="text-end text-xs">
+                  Remember Me?
+                </Label>
+              </div>
+              <Link
+                className="cursor-pointer text-end text-xs underline"
+                href="/auth/forgot-password"
+              >
+                forgot password?
+              </Link>
             </div>
-            <p
-              className="cursor-pointer text-end text-xs"
-              onClick={() => router.push("/forgot-password")}
-            >
-              forgot password?
-            </p>
-          </div>
-          <CardFooter className="flex justify-center">
-            <div className="grid">
-              <Button className="my-5" type="submit">
-                Sign In
-              </Button>
-              <p className="text-end text-xs">
-                Dont have account?{" "}
-                <a href="/register" className="cursor-pointer">
-                  click here to sign up
-                </a>
-              </p>
-            </div>
-          </CardFooter>
-        </Card>
+            <CardFooter className="flex justify-center">
+              <div className="grid">
+                <Button
+                  className="my-5 w-[300px] rounded-xl bg-orange-300 text-sm font-medium"
+                  variant={"default"}
+                  disabled={isLoading}
+                  type="submit"
+                >
+                  {isLoading ? <Loader2 className=" animate-spin" /> : 'Sign Up'}
+                </Button>
+              </div>
+            </CardFooter>
+          </Card>
+        </form>
       </div>
     </main>
   );

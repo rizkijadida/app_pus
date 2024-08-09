@@ -9,17 +9,17 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
   level: any;
 }
 
-interface UserRegisterState extends Omit<UserState, "id" | "gender"> {
+interface UserRegisterState extends Omit<UserState, "id" > {
 }
 
-interface LoginUserState extends Omit<UserState, "password" | "level"> {}
+interface LoginUserState extends Pick<UserState, "email" | "password"> {}
 
 
 const initialState: UserState = {
   id: 0,
+  email: '',
   firstName: '',
   lastName: '',
-  email: '',
   password: '',
   level: '',
 };
@@ -36,10 +36,8 @@ export const userSlice = createSlice({
       state.level = action.payload.level
     },
     loginAction: (state, action: PayloadAction<LoginUserState>) => {
-      state.id = action.payload.id;
-      state.firstName = action.payload.firstName;
-      state.lastName = action.payload.lastName;
       state.email = action.payload.email;
+      state.password = action.payload.password;
     },
     logoutAction: (state) => {
       state.id = 0;

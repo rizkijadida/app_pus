@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { Label } from "./ui/label";
+import { Select } from "./ui/select";
 
 export interface FormSelectProps {
   id: string;
