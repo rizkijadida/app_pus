@@ -1,8 +1,6 @@
-import { JWT_SECRET } from '@/config';
-import { sign } from 'jsonwebtoken';
+import { User } from '@prisma/client';
 import { comparePassword } from '../../lib/bcrypt';
 import prisma from '../../prisma';
-import { User } from '@prisma/client';
 
 export const LoginService = async (body: Pick<User, 'email' | 'password'>) => {
   try {

@@ -2,7 +2,7 @@
 import { axiosInstance } from "@/lib/axios";
 import { useAppDispatch } from "@/redux/hooks";
 import { registerAction } from "@/redux/slices/user/userSlice";
-import { User } from "@/types/user.types";
+import { User } from "@/types/userTypes/user.types";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

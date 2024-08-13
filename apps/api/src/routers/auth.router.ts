@@ -15,11 +15,11 @@ export class AuthRouter {
   private initializeRouter() {
     this.router.post('/register', this.authController.RegisterController);
     this.router.post('/login', this.authController.LoginController);
-    // this.router.get(
-    //   '/keep-login',
-    //   verifyToken,
-    //   this.authController.KeepLoginController,
-    // );
+    this.router.get(
+      '/keep-login',
+      verifyToken,
+      this.authController.KeepLoginController,
+    );
     this.router.post(
       '/verify',
       verifyToken,

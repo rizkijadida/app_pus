@@ -1,7 +1,7 @@
 import { axiosInstance } from "@/lib/axios";
 import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
-import { User } from "@/types/user.types";
+import { User } from "@/types/userTypes/user.types";
 import { AxiosError } from "axios";
 
 interface ProfileArgs extends User {
@@ -13,6 +13,7 @@ interface ProfileResponse {
   data: User;
   token: string;
 }
+
 const useGetProfile = () => {
   const { id } = useAppSelector((state: RootState) => state.user);
 

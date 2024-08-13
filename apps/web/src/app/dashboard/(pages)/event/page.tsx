@@ -1,6 +1,5 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
-import { MdOutlineTimer } from "react-icons/md";
 import {
   Card,
   CardContent,
@@ -8,16 +7,23 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import useGetEvents from "@/hooks/api/dashboard/useGetEvents";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaCalendarAlt, FaCalendarCheck, FaPaperPlane } from "react-icons/fa";
-import { SiBookstack } from "react-icons/si";
-import { Separator } from "@/components/ui/separator";
+import { MdOutlineTimer } from "react-icons/md";
 
 const Event = () => {
-  const router = useRouter();
-  const [visibleCount, setVisibleCount] = useState(4);
+  const [page, setPage] = useState<number>(1);
+  const { data: events, meta } = useGetEvents({
+    page,
+    take: 3,
+  });
+
+  const handleChangePaginate = ({ selected }: { selected: number }) => {
+    setPage(selected + 1);
+  };
 
   return (
     <div className="container m-3">
@@ -32,7 +38,7 @@ const Event = () => {
         </div>
         <Separator className="bg-[#1c71cd]" />
 
-        <div className="m-5 flex flex-wrap gap-10">
+        <div className="m-5 flex flex-wrap items-center justify-center gap-10">
           <Card className="grid w-[500px] grid-cols-3 border-blue-300 shadow-xl">
             <div className="col-span-1 flex flex-col">
               <div className="relative h-32 w-32">

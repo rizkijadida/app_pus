@@ -1,21 +1,34 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { FaCalendarCheck } from "react-icons/fa";
-import { FaRegCalendarDays } from "react-icons/fa6";
-import { FaWallet } from "react-icons/fa6";
-import { FaLink } from "react-icons/fa";
-import { Button } from "@/components/ui/button";
+import { FaCalendarCheck, FaLink } from "react-icons/fa";
+import { FaRegCalendarDays, FaWallet } from "react-icons/fa6";
 import { IoPersonAdd } from "react-icons/io5";
+import EventCardList from "./(pages)/event/components/EventCardList";
+import useGetEvents from "@/hooks/api/dashboard/useGetEvents";
+import { appConfig } from "@/utils/config";
+import Pagination from "./Pagination";
+
 
 const Dashboard = () => {
   const router = useRouter();
-  const [visibleCount, setVisibleCount] = useState(4);
+  const [page, setPage] = useState<number>(1);
+  const { data: events, meta } = useGetEvents({
+    page,
+    take: 3,
+  });
+
+  console.log(events);
+
+  const handleChangePaginate = ({ selected }: { selected: number }) => {
+    setPage(selected + 1);
+  };
   return (
     <div className="container m-3">
       <div className="grid space-y-5">
@@ -32,80 +45,32 @@ const Dashboard = () => {
         </div>
 
         <div className="m-5 flex flex-wrap items-center justify-center gap-6">
-          <Card className="w-[300px] cursor-pointer border-gray-500 shadow-xl">
-            <CardHeader>
-              <div className="relative h-[220px] w-full overflow-hidden rounded-md">
-                <Image
-                  src="/chopper.jpeg"
-                  alt="thumbnail"
-                  className="object-cover"
-                  fill
-                />
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div>
-                <h2 className="line-clamp-2 justify-end text-lg font-semibold">
-                  OPSI 2024
-                </h2>
-                <div className="flex space-x-3">
-                  <p className="text-sm font-light italic">
-                    Minggu, 04 Agustus 2024
-                  </p>
-                  <Badge className="rounded-sm bg-green-100" variant="outline">
-                    4 hari lagi
-                  </Badge>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <div className="flex">
-                  <FaRegCalendarDays color="grey" />
-                  <div className="pl-2">
-                    <div className="flex flex-col space-y-2 text-xs text-slate-600">
-                      <p>Masa Pendaftaran</p>
-                      <p>06 Juni 2024 17:00 - 03 Agustus 2024 23:59 </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex">
-                  <FaWallet color="grey" />
-                  <div className="pl-2">
-                    <div className="flex flex-col space-y-2 text-xs text-slate-600">
-                      <p>Masa Pendaftaran</p>
-                      <p>06 Juni 2024 17:00 - 03 Agustus 2024 23:59 </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex">
-                  <FaLink color="grey" />
-                  <div className="pl-2">
-                    <div className="flex flex-col space-y-2 text-xs text-slate-600">
-                      <p>Link Juknis</p>
-                      <Link href={"/"}>Lihat Juknis di sini</Link>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex justify-between items-center">
-                <p className="flex flex-col space-y-2 text-xs text-slate-600">2366 Pendaftar</p>
-                  <Button
-                    onClick={() => router.push("/")}
-                    className="rounded-full bg-[#e46d07]"
-                  >
-                    <IoPersonAdd color="grey" />
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          {events.map((event, index) => {
+            return (
+              <EventCardList
+                key={index}
+                image={appConfig.baseUrl + `/assets${event.image}`}
+                name={event.name}
+                eventDate={event.eventDate}
+                startRegistration={event.startRegistration}
+                endRegistration={event.endRegistration}
+                regsitrationFee={event.regsitrationFee}
+                linkJuknis={event.linkJuknis}
+                jumlahPendaftar={10000}
+              />
+            );
+          })}
         </div>
 
-        <div>
-          <p></p>
-        </div>
+    
+      <div className="my-8 flex justify-center ">
+        <Pagination
+          total={meta?.total || 0}
+          take={meta?.take || 0}
+          onChangePage={handleChangePaginate}
+        />
+      </div>
+    
       </div>
     </div>
   );

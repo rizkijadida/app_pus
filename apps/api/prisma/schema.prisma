@@ -42,7 +42,7 @@ model User {
   lastName   String
   email      String
   password   String
-  level           Level
+  level      Level
   isVerified Boolean? @default(false)
   iseDeleted Boolean?
   token      String?
@@ -187,22 +187,25 @@ model Product {
 // opschema
 
 model Event {
-  id                Int                @id @default(autoincrement())
-  name              String
-  image             String
-  twibbon           String
-  eventDate         DateTime
-  startEventDate    DateTime
-  lastTimeEventDate DateTime
-  maxStudyField     Int
-  linkJuknis        String
-  user              User               @relation(fields: [userId], references: [id])
-  registrationMetod RegistrationMethod
-  targetPeserta     TargetPeserta
-  tipeEvent         TipeEvent
-  createdAt         DateTime           @default(now())
-  updatedAt         DateTime           @updatedAt
-  userId            Int
+  id                     Int                @id @default(autoincrement())
+  name                   String
+  image                  String
+  twibbon                String
+  startRegistration      DateTime
+  endRegistration        DateTime
+  eventDate              DateTime
+  maxStudyField          Int
+  linkJuknis             String
+  user                   User               @relation(fields: [userId], references: [id])
+  registrationMetod      RegistrationMethod
+  targetPeserta          TargetPeserta
+  tipeEvent              TipeEvent
+  createdAt              DateTime           @default(now()) 
+  updatedAt              DateTime           @updatedAt
+  userId                 Int
+  eventStatus            EventStatus 
+  registrationFee        Int?
+  registrationRequirement String?            @db.VarChar(10000)
 
   @@map("events")
 }
