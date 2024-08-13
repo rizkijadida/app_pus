@@ -1,9 +1,9 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import PrivacyTab from "../dashboard/(pages)/profile/PrivacyTab";
-import SecurityTab from "../dashboard/(pages)/profile/SecurityTab";
-import GeneralTab from "../dashboard/(pages)/profile/GeneralTab";
+import PrivacyTab from "../dashboard/(pages)/profile/components/PrivacyTab";
+import SecurityTab from "../dashboard/(pages)/profile/components/SecurityTab";
+import GeneralTab from "../dashboard/(pages)/profile/components/GeneralTab";
 import { Button } from "@/components/ui/button";
 
 const Test = () => {

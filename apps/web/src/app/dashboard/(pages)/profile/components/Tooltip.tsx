@@ -5,7 +5,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { User } from "@/types/user.types";
+import { User } from "@/types/userTypes/user.types";
 
 interface ToolTipProps extends Pick<User, "email"> {
   label: string;

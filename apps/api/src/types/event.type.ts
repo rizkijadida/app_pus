@@ -1,7 +1,8 @@
-import { TipeEvent } from '@prisma/client';
+import { TargetPeserta } from '@prisma/client';
 import { EventStatus } from './event.status';
 import { RegistrationMethod } from './registration.method';
-import { TargetPeserta } from './target.peserta';
+// import { TipeEvent } from './tipe.event.type';
+import { TipeEvent } from '@prisma/client';
 
 export interface Event {
   id: number;
@@ -20,31 +21,6 @@ export interface Event {
   targetPeserta: TargetPeserta;
   tipeEvent: TipeEvent;
   eventStatus: EventStatus;
-  regsitrationFee: number;
+  regsitrationFee: number | null;
   registrationReuirement: string;
-}
-
-
-export interface IformCreateEvent {
-  adminId: number
-  name: string;
-  level: level;
-  category: string;
-  content: string;
-  description: string;
-  thumbnail: File[];
-  link: string;
-  startDate: Date;
-  registerAt: number;
-  timeDifferencesAt: string;
-}
-
-export enum level {
-  SD,
-  SMP,
-  SMA,
-  MAHASISWA,
-  GURU_SD,
-  GURU_SMP,
-  GURU_SMA,
 }

@@ -3,10 +3,11 @@ import { AuthVerifyService } from '@/services/auth/auth.verify.service';
 // import { LoginGoogleService } from '@/services/auth/login.google.service';
 import { LoginService } from '@/services/auth/login.service';
 // import { RegisterGoogleService } from '@/services/auth/register.google.service';
+import { KeepLoginService } from '@/services/auth/keep-login';
 import { RegisterService } from '@/services/auth/register.service';
-import { NextFunction, Request, Response } from 'express';
 import { ResetPassowrdService } from '@/services/auth/reset.password.service';
-import { VerifyEmailService } from '@/services/auth/verifyEmail';   
+import { VerifyEmailService } from '@/services/auth/verifyEmail';
+import { NextFunction, Request, Response } from 'express';
 
 export class AuthController {
   async RegisterController(req: Request, res: Response, next: NextFunction) {
@@ -28,16 +29,16 @@ export class AuthController {
     }
   }
 
-  // async KeepLoginController(req: Request, res: Response, next: NextFunction) {
-  //   try {
-  //     const userId = Number(req.body.user.id);
-  //     const result = await KeepLoginService(userId);
+  async KeepLoginController(req: Request, res: Response, next: NextFunction) {
+    try {
+      const userId = Number(req.body.user.id);
+      const result = await KeepLoginService(userId);
 
-  //     return res.status(200).send(result);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
+      return res.status(200).send(result);
+    } catch (error) {
+      next(error);
+    }
+  }
 
   // async loginGoogleController(req: Request, res: Response, next: NextFunction) {
   //   try {
