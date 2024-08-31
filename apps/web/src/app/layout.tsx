@@ -1,5 +1,5 @@
 import ConditionalHeader from "@/components/ConditionalHeader";
-import { Footer } from "@/components/Footer";
+import ConditionalFooter from "@/components/ConfitonalFooter";
 import { AuthProvider } from "@/providers/authProvider";
 import StoreProvider from "@/providers/storeProvider";
 import type { Metadata } from "next";
@@ -26,7 +26,7 @@ export default function RootLayout({
           <AuthProvider>
             <ConditionalHeader />
             {children}
-            <Footer />
+            <ConditionalFooter />
           </AuthProvider>{" "}
         </StoreProvider>
       </body>

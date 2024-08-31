@@ -35,7 +35,7 @@ const Login = () => {
   return (
     <main className="container mx-auto h-[100vh] bg-gradient-to-r from-[#2853b2] to-[#1c71cd] px-4">
       <div className="flex justify-center">
-        \
+        
         <form onSubmit={handleSubmit}>
           <Card className="my-20 w-[350px] bg-white">
             <CardHeader>
