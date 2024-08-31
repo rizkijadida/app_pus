@@ -20,10 +20,9 @@ import {
 } from "@/components/ui/select";
 import useRegister from "@/hooks/api/auth/useRegister";
 import { useFormik } from "formik";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { validationSchema } from "./validationSchema";
 import { Loader2 } from "lucide-react";
+import Link from "next/link";
+import { validationSchema } from "./validationSchema";
 
 
 const Register = () => { 
@@ -42,6 +41,8 @@ const Register = () => {
         register(values)
       },
     });
+
+    
 
   return (
     <main className="mt-relative container mx-auto h-[200vh] bg-gradient-to-r from-[#2853b2] to-[#1c71cd] px-4">

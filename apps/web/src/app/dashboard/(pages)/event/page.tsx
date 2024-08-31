@@ -13,8 +13,11 @@ import Image from "next/image";
 import { useState } from "react";
 import { FaCalendarAlt, FaCalendarCheck, FaPaperPlane } from "react-icons/fa";
 import { MdOutlineTimer } from "react-icons/md";
+import { CiCircleCheck } from "react-icons/ci";
+import { useRouter } from "next/navigation";
 
 const Event = () => {
+  const router = useRouter()
   const [page, setPage] = useState<number>(1);
   const { data: events, meta } = useGetEvents({
     page,
@@ -88,10 +91,11 @@ const Event = () => {
                       </Badge>
                       <Badge
                         variant="outline"
-                        className="cursor-pointer items-center gap-1 space-x-1 bg-red-100 text-red-500"
+                        className="cursor-pointer items-center gap-1 space-x-1 bg-green-100 text-green-500"
+                        onClick={() => router.push("/exam")}
                       >
                         {" "}
-                        <MdOutlineTimer size={10} color="" /> 5 hari lagi
+                        <CiCircleCheck  size={10} color="" /> Mulai Ujian
                       </Badge>
                     </div>
                   </div>
